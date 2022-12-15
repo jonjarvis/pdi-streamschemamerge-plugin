@@ -33,21 +33,7 @@ If a stream did not originally contain a column (e.g. mango isn't in stream 1), 
 To build (requires Apache Ant and Apache Ivy)
 ```bash
 # from the project root
-ant resolve  # resolves dependencies
-ant -f build/build.xml dist  # compiles project
-```
-### Install
-1. Update the value for `kettle-dir` in `build/build.properties` to point to your `data-integration` folder
-2. Run the ant install task (once again from project root)
-
-```bash
-ant -f build/build.xml install  # compiles project and installs plugin
-```
-### Testing
-Use the following command to run functional tests
-
-```
-ant -f build/build.xml test  # run tests
+mvn clean package
 ```
 
 ## Authors

@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.swt.widgets.Shell;
 import org.pentaho.di.core.CheckResult;
 import org.pentaho.di.core.CheckResultInterface;
 import org.pentaho.di.core.Const;
@@ -47,7 +46,6 @@ import org.pentaho.di.trans.Trans;
 import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStepMeta;
 import org.pentaho.di.trans.step.StepDataInterface;
-import org.pentaho.di.trans.step.StepDialogInterface;
 import org.pentaho.di.trans.step.StepInterface;
 import org.pentaho.di.trans.step.StepMeta;
 import org.pentaho.di.trans.step.StepMetaInterface;
@@ -60,7 +58,7 @@ import org.w3c.dom.Node;
 
 @Step(	
 		id = "StreamSchemaStep",
-		image = "com/graphiq/kettle/steps/streamschemamerge/resources/icon.svg",
+		image = "mergeschemas.svg",
 		i18nPackageName="com.graphiq.kettle.steps.streamschemamerge",
 		name="StreamSchemaStep.Name",
 		description = "StreamSchemaStep.TooltipDesc",
@@ -91,19 +89,11 @@ public class StreamSchemaStepMeta extends BaseStepMeta implements StepMetaInterf
         return true;
     }
 	
-	/**
-	 * Called by Spoon to get a new instance of the SWT dialog for the step.
-	 * A standard implementation passing the arguments to the constructor of the step dialog is recommended.
-	 * 
-	 * @param shell		an SWT Shell
-	 * @param meta 		description of the step 
-	 * @param transMeta	description of the the transformation 
-	 * @param name		the name of the step
-	 * @return 			new instance of a dialog for this step 
-	 */
-	public StepDialogInterface getDialog(Shell shell, StepMetaInterface meta, TransMeta transMeta, String name) {
-		return new StreamSchemaStepDialog(shell, meta, transMeta, name);
-	}
+
+  @Override
+  public String getDialogClassName() {
+    return "com.graphiq.kettle.steps.streamschemamerge.StreamSchemaStepDialog";
+  }
 
 	/**
 	 * Called by PDI to get a new instance of the step implementation. 
@@ -371,7 +361,7 @@ public class StreamSchemaStepMeta extends BaseStepMeta implements StepMetaInterf
      * Has original function of resetStepIoMeta, but we only want to call it when appropriate
      */
 	public void wipeStepIoMeta() {
-		ioMeta = null;
+		super.resetStepIoMeta();
 	}
 
 
